@@ -1,11 +1,15 @@
 <?php
-//filename : module/SanAuthWithDbSaveHandler/view/san-auth-with-db-save-handler/auth/index.phtml
-$title = 'Login';
+//filename : module/SanAuthWithDbSaveHandler/view/san-auth-with-db-save-handler/auth/registration.phtml
+
+$title = 'Registration Form.';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
+echo "Please enter correct information.";
+echo "<hr />";
+
 $form = $this->form;
 $form->setAttribute('action', $this->url(
     'auth'
@@ -15,8 +19,3 @@ $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
-
-echo $this->error;
-
-echo "<hr />";
-echo "<a href=" . $this->url('auth', array('action' => 'registration')) . ">Create New Account</a>";

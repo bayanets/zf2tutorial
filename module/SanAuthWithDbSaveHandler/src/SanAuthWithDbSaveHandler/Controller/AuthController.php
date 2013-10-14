@@ -60,8 +60,10 @@ class AuthController extends AbstractActionController
                          array('id'          => $identityRow->id,
                                 'username'   => $dataform['username'],
                                 'ip_address' => $this->getRequest()->getServer('REMOTE_ADDR'),
-                                'user_agent'    => $request->getServer('HTTP_USER_AGENT'))
-                    );
+                                'user_agent' => $request->getServer('HTTP_USER_AGENT'),
+                    			'role'		 => $identityRow->role,
+                    		 )
+                    	);
 					
                     return $this->redirect()->toRoute('success', array('action' => 'index'));;
                 } else {
@@ -76,5 +78,16 @@ class AuthController extends AbstractActionController
         $this->identityManager->logout();
         
         return $this->redirect()->toRoute('auth');
+    }
+    
+    public function registrationAction()
+    {
+    	$form = $this->getServiceLocator()->get('FormElementManager')
+    	->get('SanAuthWithDbSaveHandler\Form\RegistrationForm');
+    	$viewModel = new ViewModel();
+    	
+    	$viewModel->setVariable('form', $form);
+    	
+    	return $viewModel;
     }
 }
